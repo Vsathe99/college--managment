@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const ProfileTitle = ({ loggedInPrn }) => {
   const { student } = useSelector((state) => state.student);
-  // console.log("student", student.student);
+  console.log("student", student.student);
 
   const [dateTime, setDateTime] = useState({
     date: new Date().toLocaleDateString(),

@@ -1,13 +1,15 @@
 import axios from "../config/axios.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setStudent } from "../store/studentSlice.js";
 
-export function AttendanceTracker({ students, subject }) {
-  const [attendanceData, setAttendanceData] = useState(students);
+export function AttendanceTracker({ students }) {
+  const [attendanceData, setAttendanceData] = useState(() => students || []);
+
   const { teacher } = useSelector((state) => state.teacher);
   const subjectName = teacher?.teacher.subject;
   const dispatch = useDispatch();
+
 
   // Update student attendance in state
   const handleChange = (prnno, field, value) => {
@@ -42,6 +44,12 @@ export function AttendanceTracker({ students, subject }) {
       })
       .catch((error) => console.error("Error updating attendance:", error));
   };
+
+  useEffect(() => {
+    if (students && students.length > 0) {
+      setAttendanceData(students);
+    }
+  }, [students]);
 
   return (
     <div className="overflow-x-auto p-6 bg-white rounded-xl shadow-lg border border-gray-200 max-w-5xl mx-auto mt-10">
