@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.subjectCard::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari */
+  }
